@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dl_playlist</title>
+</head>
+<body>
+	<h1>Tu veux quoi ?</h1>
+	<form action="/" method="POST">
+    <div>
+        <input type="radio" id="yt" name="platform" value="yt" checked>
+        <label for="yt">Youtube</label>
+				<input type="radio" id="sc" name="platform" value="sc">
+        <label for="sc">Soundcloud</label>
+    </div>
+    
+    <div>
+				<div style="display:inline" id='video_type_video'>
+        <input type="radio" id="video" name="video_type" value="video" checked>
+        <label for="video">Vidéo</label>
+        </div>
+				<input type="radio" id="audio" name="video_type" value="audio">
+        <label for="audio">Audio</label>
+    </div>
+
+    <div>
+        <input type="radio" id="video" name="link_type" value="video" checked>
+        <label for="video">Vidéo</label>
+        <input type="radio" id="playlist" name="link_type" value="playlist">
+        <label for="audio">Playlist</label>
+    </div>
+    <span id="error" style="color:red"></span>
+    <div>
+        <button type="submit">Valider</button>
+    </div>
+		<script>
+		const platformSelect = document.querySelectorAll('input[name="platform"]')
+		const videoTypeSelect = document.getElementById("video_type_video")
+		const audioRadio = document.querySelector('input#audio')
+		const videoRadio = document.querySelector('input#video')
+		const submit = document.querySelector('button[type=submit]')
+
+				
+		platformSelect.forEach((platform) => {
+		  platform.addEventListener('change', function() {
+		    if (this.value != 'yt') {
+		      videoTypeSelect.style.display = "none";
+					videoRadio.disabled = true;
+		      audioRadio.checked = true;
+		    } else {
+		      videoTypeSelect.style.display = "inline";
+					videoRadio.disabled = false;
+					videoRadio.checked = true;
+		    }
+				// if (this.value == 'sc'){
+				// 	document.getElementById('error').textContent = "ça fonctionne pas encore attend un peu";
+				// 	submit.disabled = true
+				// }else{
+				// 	document.getElementById('error').textContent = ""
+				// 	submit.disabled = false
+				// }
+		  });
+		});
+		</script>
+</form>
+</body>
+</html>

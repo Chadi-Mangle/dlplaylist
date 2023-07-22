@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dl_playlist</title>
+</head>
+<body>
+	<form action="/link?platform={{platform}}&link_type={{link_type}}&video_type={{video_type}}" method="POST" onsubmit="return confirm()">
+		{% if link_type == 'video': %}
+			<span>Donne le lien de ta musique : <input type="text" name="url" id="url"></span> <br>
+		{% else %}
+			<span>Donne le lien de ta playlist ou album : <input type="text" name="url" id="url"></span> <br>
+		{% endif %}
+		<span id="error" style="color:red"></span>
+		<div>
+			<button type="submit">Valider</button>
+		</div>
+	</form>
+	<script>
+		function confirm(){
+	  	var url = document.getElementById("url").value;
+	
+			var url1 = '{{url_type1}}'
+				
+			if ((url.startsWith(url1))){
+				if (url.includes('/sets/')){
+					if ('{{link_type}}' == 'playlist'){
+						// console.log("true1")
+						return true
+				}
+				// console.log("false1")
+				document.getElementById('error').textContent = "Lien invalide";
+				return false
+			}
+			if ('{{link_type}}' == 'playlist'){
+				document.getElementById('error').textContent = "Lien invalide";
+				// console.log("false2")
+				return false
+			}
+			// console.log("true2")
+			return true
+			}
+			// console.log("false3")
+			document.getElementById('error').textContent = "Lien invalide";
+			return false
+		}
+	</script>
+</body>
+</html>

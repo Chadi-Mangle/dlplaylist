@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dl_playlist</title>
+</head>
+<body>
+	<form action="/download?platform={{platform}}&link_type={{link_type}}&video_type={{video_type}}&url={{url}}" method="POST">
+		<img src="{{thumbnail}}" alt="thumbnail" width=300px>
+		<p>{{title}}</p>
+		<div>
+			<button type="submit" onclick="loading()">Télécharger</button>
+		</div>
+	</form>
+	<script>
+	    function loading(){
+					var form = document.querySelector("form")	        
+	        form.submit()
+				
+					body = document.querySelector('body')
+					body.innerHTML = "Chargement..."
+	    }
+	</script>
+</body>
+</html>

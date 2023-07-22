@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dl_playlist</title>
+</head>
+<body>
+	<form action="/link?platform={{platform}}&link_type={{link_type}}&video_type={{video_type}}" method="POST" onsubmit="return confirm()">
+		<span>Donne le lien de ta {{link_type}} : <input type="text" name="url" id="url"></span> <br>
+		<span id="error" style="color:red"></span>
+		<div>
+			<button type="submit">Valider</button>
+		</div>
+	</form>
+	<script>
+		function confirm(){
+	  	var url = document.getElementById("url").value;
+	
+			var url1 = '{{url_type1}}'
+			var url2 = '{{url_type2}}'
+				
+			if ((url.startsWith(url1)) || (url.startsWith(url2))){
+				if (url.includes('playlist')){
+					if ('{{link_type}}' == 'playlist'){
+					return true
+				}
+				document.getElementById('error').textContent = "Lien de {{link_type}} invalide";
+				return false
+			}
+			return true
+			}
+			document.getElementById('error').textContent = "Lien de {{link_type}} invalide";
+			return false 
+		}
+	</script>
+</body>
+</html>
