@@ -1,0 +1,14 @@
+*.mp3
+*.mp4
+
+*.pyc
+
+./.replit
+./venv/
+./replit.nix
+
+./playlist/
+./playlist.zip
+
+./main_dl.py
+./__pycache__/
