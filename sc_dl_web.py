@@ -31,7 +31,7 @@ def dl_playlist_or_video(url):
 	if '/sets/' in url:
 			make_archive('playlist', 'zip', 'playlist')
 			return data['title'] + '.zip' 
-	return {data['title']} + '.mp3'
+	return data['title'] + '.mp3'
 
 
 def get_playlist_or_video_info(url):
@@ -41,4 +41,3 @@ def get_playlist_or_video_info(url):
 		title = soup.find('meta', property='og:title')['content']
 		cover_url = soup.find('meta', property='og:image')['content']
 		return title, cover_url
-		

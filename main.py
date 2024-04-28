@@ -4,8 +4,6 @@ import sc_dl_web
 import youtube_downloader
 import youtube_downloader_audio
 
-app = Flask(__name__)
-
 BASE_YOUTUBE_URL = "https://youtu.be"
 BASE_YOUTUBE_URL2 = "https://www.youtube.com"
 
@@ -14,6 +12,8 @@ BASE_PLAYLIST_URL2 = "https://www.youtube.com/playlist?list"
 
 BASE_SOUNDCLOUD_URL = "https://soundcloud.com/"
 
+
+app = Flask(__name__)
 
 @app.route('/', methods=["POST", "GET"])
 def index():
@@ -31,19 +31,19 @@ def index():
 				url_type2 = BASE_PLAYLIST_URL2
 
 			return render_template("get_yt_url.html",
-			                       platform=platform,
-			                       link_type=link_type,
-			                       video_type=video_type,
-			                       url_type1=url_type1,
-			                       url_type2=url_type2)
+								platform=platform,
+								link_type=link_type,
+								video_type=video_type,
+								url_type1=url_type1,
+								url_type2=url_type2)
 		elif platform == "sc":
 			url_type1 = BASE_SOUNDCLOUD_URL
 
 			return render_template("get_sc_url.html",
-			                       platform=platform,
-			                       link_type=link_type,
-			                       video_type=video_type,
-			                       url_type1=url_type1)
+								platform=platform,
+								link_type=link_type,
+								video_type=video_type,
+								url_type1=url_type1)
 
 
 	return render_template("index.html")
@@ -60,21 +60,21 @@ def link():
 		if platform == 'yt':
 			title, thumbnail = yt_dl_web.get_playlist_or_video_info(link_type, url)
 			return render_template("download_page.html",
-			                       platform=platform,
-			                       link_type=link_type,
-			                       video_type=video_type,
-			                       url=url,
-			                       title=title,
-			                       thumbnail=thumbnail)
+								platform=platform,
+								link_type=link_type,
+								video_type=video_type,
+								url=url,
+								title=title,
+								thumbnail=thumbnail)
 		elif platform == 'sc':
 			title, thumbnail = sc_dl_web.get_playlist_or_video_info(url)
 			return render_template("download_page.html",
-			                       platform=platform,
-			                       link_type=link_type,
-			                       video_type=video_type,
-			                       url=url,
-			                       title=title,
-			                       thumbnail=thumbnail)
+								platform=platform,
+								link_type=link_type,
+								video_type=video_type,
+								url=url,
+								title=title,
+								thumbnail=thumbnail)
 
 
 @app.route("/download", methods=["POST", "GET"])
@@ -91,23 +91,23 @@ def download():
 		if link_type == "video":
 			if video_type == "video":
 				return send_file("./video.mp4",
-				                 as_attachment=True,
-				                 download_name=filename)
+								as_attachment=True,
+								download_name=filename)
 			else:
 				return send_file("./video.mp4",
-				                 as_attachment=True,
-				                 download_name=filename[:-1]+'3')
+								as_attachment=True,
+								download_name=filename[:-1]+'3')
 				
 	elif platform == 'sc':
 		filename = sc_dl_web.dl_playlist_or_video(url)
 		if link_type == "video":
 			return send_file("./video.mp3",
-			                 as_attachment=True,
-			                 download_name=filename)
+							as_attachment=True,
+							download_name=filename)
 			
 	return send_file("./playlist.zip",
-							 as_attachment=True,
-							 download_name=filename)
+							as_attachment=True,
+							download_name=filename)
 
 
 app.run(host='0.0.0.0', port=81, debug=True)
