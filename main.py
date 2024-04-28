@@ -90,22 +90,22 @@ def download():
 
 		if link_type == "video":
 			if video_type == "video":
-				return send_file("/home/runner/dlplaylist/video.mp4",
+				return send_file("./video.mp4",
 				                 as_attachment=True,
 				                 download_name=filename)
 			else:
-				return send_file("/home/runner/dlplaylist/video.mp4",
+				return send_file("./video.mp4",
 				                 as_attachment=True,
 				                 download_name=filename[:-1]+'3')
 				
 	elif platform == 'sc':
 		filename = sc_dl_web.dl_playlist_or_video(url)
 		if link_type == "video":
-			return send_file("/home/runner/dlplaylist/video.mp3",
+			return send_file("./video.mp3",
 			                 as_attachment=True,
 			                 download_name=filename)
 			
-	return send_file("/home/runner/dlplaylist/playlist.zip",
+	return send_file("./playlist.zip",
 							 as_attachment=True,
 							 download_name=filename)
 
